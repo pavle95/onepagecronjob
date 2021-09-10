@@ -28,22 +28,57 @@
                     console.log(i);
                     const element = top[i];
                     console.log(element);
-                    document.getElementById(i+1).innerHTML = 
-                    element.name + "-" + element.rating + "-" + element.nesto
+                    const position = i+1
+                    document.getElementById('position'+position).innerHTML = i+1;
+                    document.getElementById('name'+position).innerHTML = element.name;
+                    document.getElementById('roi'+position).innerHTML = element.rating;
                 }
                 // document.getElementById('txt').innerHTML =
                 // h + ":" + m + ":" + s;
-                var t = setTimeout(startTime, 10000);
+                var t = setTimeout(startTime, 30000);
             }
 
     </script>
 <body onload="startTime()">
-<div class="subscribe-container">
-    <div id=1></div>
-    <div id=2></div>
-    <div id=3></div>
-    <div id=4></div>
-    <div id=5></div>
-</div>
+<!-- //<div class="subscribe-container"> -->
+    <table style="width: 100%">
+            <tr>
+                <th>POSITION</th>
+                <th>TOP 5</th>
+                <th>ROI</th>
+            </tr>
+
+
+            <tr>
+                <td id='position1'></td>
+                <td id='name1'></td>
+                <td id="roi1"></td>
+            </tr>
+
+            <tr>
+                <td id='position2'></td>
+                <td id='name2'></td>
+                <td id="roi2"></td>
+            </tr>
+
+            <tr>
+                <td id='position3'></td>
+                <td id='name3'></td>
+                <td id="roi3"></td>
+            </tr>
+
+            <tr>
+                <td id='position4'></td>
+                <td id='name4'></td>
+                <td id="roi4"></td>
+            </tr>
+            <tr>
+                <td id='position5'></td>
+                <td id='name5'></td>
+                <td id="roi5"></td>
+            </tr>
+
+    </table>
+<!-- </div> -->
 </body>
 </html>

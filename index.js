@@ -4,8 +4,8 @@ var axios = require('axios');
 
 const fs = require("fs");
 
-const app = express()
-const port = 3000
+const app = express();
+const port = 3000;
 
 const take = async url => {
     try {

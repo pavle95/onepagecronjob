@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="app.css">
+  <link rel="stylesheet"
+  href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css">
+  <title>html form</title>
+</head>
+<script>
+            function getJSON(path) {
+                return fetch(path).then(response => response.json());
+            }
+
+
+            async function startTime() {
+                let top = [];
+                // load json data; then proceed
+                await getJSON('test.json').then(list => {
+                    console.log(list);
+                    // get title property and log it to the console
+                    top = list.players;
+                })
+
+                console.log(top);
+                for (let i = 0; i < top.length; i++) {
+                    console.log(i);
+                    const element = top[i];
+                    console.log(element);
+                    document.getElementById(i+1).innerHTML = 
+                    element.name + "-" + element.rating + "-" + element.nesto
+                }
+                // document.getElementById('txt').innerHTML =
+                // h + ":" + m + ":" + s;
+                var t = setTimeout(startTime, 10000);
+            }
+
+    </script>
+<body onload="startTime()">
+<div class="subscribe-container">
+    <div id=1></div>
+    <div id=2></div>
+    <div id=3></div>
+    <div id=4></div>
+    <div id=5></div>
+</div>
+</body>
+</html>

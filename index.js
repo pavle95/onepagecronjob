@@ -10,7 +10,6 @@ const port = 3000;
 const take = async url => {
     try {
         const response = await axios.get(url);
-        console.log(response.data);
         return response.data;
     } catch (error) {
         console.log(error); 
@@ -24,11 +23,15 @@ const write = async data => {
 }
 
 cron.schedule("*/20 * * * * *", async function() {
-    //toplist = new Date();
-    console.log('misko');
-    const data = await take('http://127.0.0.1:8000/test');
-    console.log(data);
-    write(data);
+    try {
+        const data = await take('http://127.0.0.1:8000/test');
+        if (data) {
+            write(data);
+        }
+    } catch (error) {
+        console.log(error);
+    }
+
 });
 
 app.get('/', (req, res) => {

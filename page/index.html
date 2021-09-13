@@ -13,21 +13,15 @@
                 return fetch(path).then(response => response.json());
             }
 
-
             async function startTime() {
                 let top = [];
                 // load json data; then proceed
                 await getJSON('test.json').then(list => {
-                    console.log(list);
-                    // get title property and log it to the console
                     top = list.players;
                 })
 
-                console.log(top);
                 for (let i = 0; i < top.length; i++) {
-                    console.log(i);
                     const element = top[i];
-                    console.log(element);
                     const position = i+1
                     document.getElementById('position'+position).innerHTML = i+1;
                     document.getElementById('name'+position).innerHTML = element.name;
@@ -38,9 +32,28 @@
                 var t = setTimeout(startTime, 30000);
             }
 
+            async function clock() {
+                const time = new Date();
+                let hour = time.getHours();
+                let min = time.getMinutes();
+
+                hour = hour < 10 ? "0" + hour : hour;
+                min = min < 10 ? "0" + min : min;
+
+                document.getElementById('clock').innerHTML = hour+":"+min;
+
+                var t = setTimeout(clock, 60000);
+            }
+
+            async function start() {
+                startTime();
+                clock();
+            }
     </script>
-<body onload="startTime()">
+<body onload="start()">
 <!-- //<div class="subscribe-container"> -->
+    <div><p id=clock></p></div>
+
     <table style="width: 100%">
             <tr>
                 <th>POSITION</th>

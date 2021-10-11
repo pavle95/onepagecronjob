@@ -6,30 +6,50 @@
   <link rel="stylesheet" href="app.css">
   <link rel="stylesheet"
   href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <title>html form</title>
+  <meta http-equiv="Refresh" content="30"> 
 </head>
 <script>
             function getJSON(path) {
                 return fetch(path).then(response => response.json());
             }
 
+
             async function startTime() {
                 let top = [];
-                // load json data; then proceed
+                let previous = [];
                 await getJSON('test.json').then(list => {
                     top = list.players;
-                })
+                });
+                await getJSON('previous.json').then(list => {
+                    previous = list.players;
+                });
 
                 for (let i = 0; i < top.length; i++) {
                     const element = top[i];
-                    const position = i+1
+                    console.log(previous);
+                    const found = previous.find(p => p.name == element.name);
+                    let change = "NEW";
+                    const position = i+1;
+                    if (found) {
+                        const prevPostion = previous.indexOf(found);
+                        if (prevPostion == i) {
+                            change = "SAME"
+                        } else if (prevPostion > i) {
+                            change = "UP";
+                        } else if (prevPostion < i) {
+                            change = "DOWN";
+                        }
+                    }
+
                     document.getElementById('position'+position).innerHTML = i+1;
+                    document.getElementById('change'+position).innerHTML = change;
                     document.getElementById('name'+position).innerHTML = element.name;
                     document.getElementById('roi'+position).innerHTML = element.rating;
                 }
-                // document.getElementById('txt').innerHTML =
-                // h + ":" + m + ":" + s;
                 var t = setTimeout(startTime, 30000);
+
             }
 
             async function clock() {
@@ -49,7 +69,8 @@
                 startTime();
                 clock();
             }
-    </script>
+</script>
+
 <body onload="start()">
 <!-- //<div class="subscribe-container"> -->
     <div><p id=clock></p></div>
@@ -57,38 +78,44 @@
     <table style="width: 100%">
             <tr>
                 <th>POSITION</th>
+                <th>CHANGE</th>
                 <th>TOP 5</th>
                 <th>ROI</th>
             </tr>
 
 
-            <tr>
-                <td id='position1'></td>
-                <td id='name1'></td>
-                <td id="roi1"></td>
+            <tr style="text-align: center;">
+                <td id='position1'>No Data</td>
+                <td id='change1'>No Data</td>
+                <td id='name1'>No Data</td>
+                <td id="roi1">No Data</td>
             </tr>
 
-            <tr>
-                <td id='position2'></td>
-                <td id='name2'></td>
-                <td id="roi2"></td>
+            <tr style="text-align: center;">
+                <td id='position2'>No Data</td>
+                <td id='change2'>No Data</td>
+                <td id='name2'>No Data</td>
+                <td id="roi2">No Data</td>
             </tr>
 
-            <tr>
-                <td id='position3'></td>
-                <td id='name3'></td>
-                <td id="roi3"></td>
+            <tr style="text-align: center;">
+                <td id='position3'>No Data</td>
+                <td id='change3'>No Data</td>
+                <td id='name3'>No Data</td>
+                <td id="roi3">No Data</td>
             </tr>
 
-            <tr>
-                <td id='position4'></td>
-                <td id='name4'></td>
-                <td id="roi4"></td>
+            <tr style="text-align: center;">
+                <td id='position4'>No Data</td>
+                <td id='change4'>No Data</td>
+                <td id='name4'>No Data</td>
+                <td id="roi4">No Data</td>
             </tr>
-            <tr>
-                <td id='position5'></td>
-                <td id='name5'></td>
-                <td id="roi5"></td>
+            <tr style="text-align: center;">
+                <td id='position5'>No Data</td>
+                <td id='change5'>No Data</td>
+                <td id='name5'>No Data</td>
+                <td id="roi5">No Data</td>
             </tr>
 
     </table>

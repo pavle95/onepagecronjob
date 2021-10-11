@@ -19,12 +19,16 @@ const take = async url => {
 const write = async data => {
     const jsonString = JSON.stringify(data)
 
+    const previous = fs.readFileSync('common/test.json');
+
+    fs.writeFileSync('common/previous.json', previous);
+
     fs.writeFileSync('common/test.json', jsonString);
 }
 
 cron.schedule("*/20 * * * * *", async function() {
     try {
-        const data = await take('http://127.0.0.1:8000/test');
+        const data = await take('http://127.0.0.1:3333/test?token=miskodrakula');
         if (data) {
             write(data);
         }
